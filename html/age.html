@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <link rel = "stylesheet" href="../css/index.css">
+        <title>Suicide Rates</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    </head>
+    <body data-spy="scroll" data-target=".navbar" data-offset="50" class="main-body"> 
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="../js/utilities.js"></script>
+        <script src="../js/age.js"></script>
+        
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="../index.html">Suicide Rate Analysis</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li><a href="../index.html">Home</a></li>
+                <li ><a href="gender.html">Gender</a></li>
+                <li class="active"><a href="age.html">Age Group</a></li>
+                <li><a href="soci-economic.html">Soci-Economic Factor</a></li>
+                <li ><a href="country-wise.html">Country-Wise</a></li>
+                <li><a href="overview.html">Over View</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="author.html"><span class="glyphicon glyphicon-user"></span>About Me</a></li>
+              </ul>
+            </div>
+          </nav>
+
+          <div class="jumbotron text-center">
+            <h1>Suicide Rate Analysis</h1>
+            <h2>Based on Age Group</h2>
+          </div>
+          
+          <div class="container intro-font-color text-center">
+              <div class="row">
+                <div class="col-sm-4" id = "age_group_block">
+                  <h1>Filter Options</h1>
+                  <h3>Suicide Rates Aggregate Type</h3>
+                  <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-secondary active" id="agg_l_1">
+                          <input type="checkbox" name="agg" id="agg_1" value="true" checked="true">Average<br>
+                      </label>
+                      <label class="btn btn-secondary" id="agg_l_2">
+                          <input type="checkbox" name="agg" id="agg_2" value="false" checked="fase">Sum<br>
+                      </label>
+                  </form>
+                  <h3>Gender</h3>
+                  <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-secondary active" id="sex_l_0">
+                        <input type="checkbox" name="ageCheckBox" id="sex_0" value="" checked="true">Both<br>
+                      </label>
+                      <label class="btn btn-secondary" id="sex_l_1">
+                        <input type="checkbox" name="ageCheckBox" id="sex_1" value="male" checked="false">Male<br>
+                      </label>
+                      <label class="btn btn-secondary" id="sex_l_2">
+                          <input type="checkbox" name="ageCheckBox" id="sex_2" value="female" checked="false">Female<br>
+                        </label>
+                    </form>
+                    <h3>GDP Range (in Billion $)</h3>
+                    <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary active" id="gdp_l_0">
+                            <input type="checkbox" name="gdpCheckBox" id="gdp_0" value="" checked="true">All Values<br>
+                          </label>
+                        <label class="btn btn-secondary" id="gdp_l_1">
+                          <input type="checkbox" name="gdpCheckBox" id="gdp_1" value="0 - 8.99" checked="true">0 - 8.99<br>
+                        </label>
+                        <label class="btn btn-secondary" id="gdp_l_2">
+                            <input type="checkbox" name="gdpCheckBox" id="gdp_2" value="8.99 - 48.11" checked="false">8.99 - 48.11<br>
+                        </label>
+                        <label class="btn btn-secondary" id="gdp_l_3">
+                            <input type="checkbox" name="gdpCheckBox" id="gdp_3" value="48.11 - 260.2" checked="false">48.11 - 260.2<br>
+                        </label>
+                        <label class="btn btn-secondary" id="gdp_l_4">
+                            <input type="checkbox" name="gdpCheckBox" id="gdp_4" value="260+" checked="false">260+<br>
+                        </label>
+                      </form>
+                  <h3>Suicide Rate Data Type</h3>
+                  <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
+                      <label class="btn btn-secondary active" id="dataType_l_1">
+                          <input type="checkbox" name="dataT" id="dataType_1" value="suicide_no" checked>Suicide No<br>
+                      </label>
+                      <label class="btn btn-secondary" id="dataType_l_2">
+                          <input type="checkbox" name="dataT" id="dataType_2" value="suicides/100k" checked>Suicide No Per 100K Population<br>
+                      </label>
+                  </form>
+                </div>
+                <div class="col-sm-6 text-center" id = "age-div">
+                  <h1>Suicide Rates</h1>
+                  <svg id="age-svg"></svg>
+                </div>
+                <div class="col-sm-2 text-center" id = "age-legend-div">
+                    <svg id="age-legend-svg"></svg>
+                </div>
+              </div>
+            </div>
+          
+          </body>
+</html>

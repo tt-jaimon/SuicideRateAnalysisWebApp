@@ -1,0 +1,280 @@
+<html>
+    <head>
+        <link rel = "stylesheet" href="../css/index.css">
+        <title>Suicide Rates</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    </head>
+    <body data-spy="scroll" data-target=".navbar" data-offset="50" class="main-body"> 
+      <script src="https://d3js.org/d3.v4.min.js"></script>
+      <script src="http://d3js.org/queue.v1.min.js"></script>
+        <script src="../js/utilities.js"></script>
+        <script src="../js/overview.js"></script>
+        
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="../index.html">Suicide Rate Analysis</a>
+              </div>
+              <ul class="nav navbar-nav">
+                <li><a href="../index.html">Home</a></li>
+                <li ><a href="gender.html">Gender</a></li>
+                <li ><a href="age.html">Age Group</a></li>
+                <li ><a href="soci-economic.html">Soci-Economic Factor</a></li>
+                <li><a href="country-wise.html">Country-Wise</a></li>
+                <li class="active"><a href="overview.html">Over View</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="author.html"><span class="glyphicon glyphicon-user"></span>About Me</a></li>
+              </ul>
+            </div>
+          </nav>
+
+          <div class="jumbotron text-center">
+            <h1>Suicide Rate Analysis</h1>
+            <h2>Generic Overview</h2>
+          </div>
+          
+          <div class="container-fluid intro-font-color text-center">
+                <div class="row">
+                        <div class="col-sm-4 text-center">
+                            <div class="row" id="gender-div">
+                                <div>
+                                    <svg id="gender-svg"></svg>
+                                </div>
+                            </div>
+                            <div class="row" id="age-div">
+                                <div>
+                                    <svg id="age-svg"></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 text-center">
+                                <div class="row">
+                                    <div id="country-legend-div">
+                                        <svg id="country-legend-svg"></svg>
+                                    </div>
+                                    <div id="country-wise-div">
+                                        <svg id="country-wise-svg"></svg>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 text-center" id="age-legend-div">
+                                        <svg id="age-legend-svg"></svg>
+                                    </div>
+                                    <div class="col-sm-6 text-center" id="socio-div">
+                                        <svg id="socio-svg"></svg>
+                                    </div>
+                                    <div class="col-sm-1 text-center" id="socio-legend-div">
+                                        <svg id="socio-legend-svg"></svg>
+                                    </div>
+                                </div> 
+                        </div>>
+                </div>
+                <div class="row">
+                        <div class="col-sm-12">
+                            <h1>Filter Options</h1>
+                        </div>
+                </div>
+              <div class="row">
+                <div class="col-sm-3" id = "age_group_block">
+                        <h3>Suicide Rates Aggregate Type</h3>
+                        <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary active" id="agg_l_1">
+                                <input type="checkbox" name="agg" id="agg_1" value="true" checked="true">Average<br>
+                            </label>
+                            <label class="btn btn-secondary" id="agg_l_2">
+                                <input type="checkbox" name="agg" id="agg_2" value="false" checked="fase">Sum<br>
+                            </label>
+                        </form>
+                </div>
+                <div class="col-sm-3">
+                        <h3>Suicide Rate Data Type</h3>
+                        <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary active" id="dataType_l_1">
+                                <input type="checkbox" name="dataT" id="dataType_1" value="suicide_no" checked>Suicide No<br>
+                            </label>
+                            <label class="btn btn-secondary" id="dataType_l_2">
+                                <input type="checkbox" name="dataT" id="dataType_2" value="suicides/100k" checked>Suicide No Per 100K Population<br>
+                            </label>
+                        </form>
+                </div>
+                <div class="col-sm-2">
+                        <h3>Gender</h3>
+                        <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary active" id="sex_l_0">
+                                <input type="checkbox" name="ageCheckBox" id="sex_0" value="" checked="true">Both<br>
+                            </label>
+                            <label class="btn btn-secondary" id="sex_l_1">
+                                <input type="checkbox" name="ageCheckBox" id="sex_1" value="male" checked="false">Male<br>
+                            </label>
+                            <label class="btn btn-secondary" id="sex_l_2">
+                                <input type="checkbox" name="ageCheckBox" id="sex_2" value="female" checked="false">Female<br>
+                              </label>
+                          </form>
+                </div>
+                <div class="col-sm-4">
+                        <h3>GDP Range (in Billion $)</h3>
+                        <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary active" id="gdp_l_0">
+                                <input type="checkbox" name="gdpCheckBox" id="gdp_0" value="" checked="true">All Values<br>
+                              </label>
+                            <label class="btn btn-secondary" id="gdp_l_1">
+                              <input type="checkbox" name="gdpCheckBox" id="gdp_1" value="0 - 8.99" checked="true">0 - 8.99<br>
+                            </label>
+                            <label class="btn btn-secondary" id="gdp_l_2">
+                                <input type="checkbox" name="gdpCheckBox" id="gdp_2" value="8.99 - 48.11" checked="false">8.99 - 48.11<br>
+                            </label>
+                            <label class="btn btn-secondary" id="gdp_l_3">
+                                <input type="checkbox" name="gdpCheckBox" id="gdp_3" value="48.11 - 260.2" checked="false">48.11 - 260.2<br>
+                            </label>
+                            <label class="btn btn-secondary" id="gdp_l_4">
+                                <input type="checkbox" name="gdpCheckBox" id="gdp_4" value="260+" checked="false">260+<br>
+                            </label>
+                          </form>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-sm-4">
+                            <h3>Age Group</h3>
+                            <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary active" id="age_l_0">
+                                  <input type="checkbox" name="myCheckBox" id="age_0" value="" checked="true">All Age Groups<br>
+                                </label>
+                                <label class="btn btn-secondary" id="age_l_1">
+                                    <input type="checkbox" name="myCheckBox" id="age_1" value="5-14 years" checked="false">5-14 Years<br>
+                                </label>
+                                <label class="btn btn-secondary" id="age_l_2">
+                                    <input type="checkbox" name="myCheckBox" id="age_2" value="15-24 years" checked="false">15-24 Years<br>
+                                </label>
+                                <label class="btn btn-secondary" id="age_l_3">
+                                    <input type="checkbox" name="myCheckBox" id="age_3" value="25-34 years" checked="false">25-34 Years<br>
+                                </label>
+                                <label class="btn btn-secondary" id="age_l_4">
+                                    <input type="checkbox" name="myCheckBox" id="age_4" value="35-54 years" checked="false">35-54 Years<br>
+                                </label>
+                                <label class="btn btn-secondary" id="age_l_5">
+                                    <input type="checkbox" name="myCheckBox" id="age_5" value="55-74 years" checked="false">55-74 Years<br>
+                                </label>
+                                <label class="btn btn-secondary" id="age_l_6">
+                                    <input type="checkbox" name="myCheckBox" id="age_6" value="75+ years" checked="false">75+ Years<br>
+                                </label>
+                              </form>
+                    </div>
+                    <div class="col-sm-8">
+                            <h3>Year</h3>
+                            <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary active" id="year_l_0">
+                                  <input type="checkbox" name="yearCheckBox" id="year_0" value="" checked="true">All Year<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_1">
+                                    <input type="checkbox" name="yearCheckBox" id="year_1" value=1985 checked="false">1985<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_2">
+                                    <input type="checkbox" name="yearCheckBox" id="year_2" value=1986 checked="false">1986<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_3">
+                                    <input type="checkbox" name="yearCheckBox" id="year_3" value=1987 checked="false">1987<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_4">
+                                    <input type="checkbox" name="yearCheckBox" id="year_4" value=1988 checked="false">1988<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_5">
+                                    <input type="checkbox" name="yearCheckBox" id="year_5" value=1989 checked="false">1989<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_6">
+                                    <input type="checkbox" name="yearCheckBox" id="year_6" value=1990 checked="false">1990<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_7">
+                                    <input type="checkbox" name="yearCheckBox" id="year_7" value=1991 checked="false">1991<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_8">
+                                    <input type="checkbox" name="yearCheckBox" id="year_8" value=1992 checked="false">1992<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_9">
+                                    <input type="checkbox" name="yearCheckBox" id="year_9" value=1993 checked="false">1993<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_10">
+                                    <input type="checkbox" name="yearCheckBox" id="year_10" value=1994 checked="false">1994<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_11">
+                                    <input type="checkbox" name="yearCheckBox" id="year_11" value=1995 checked="false">1995<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_12">
+                                    <input type="checkbox" name="yearCheckBox" id="year_12" value=1996 checked="false">1996<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_13">
+                                    <input type="checkbox" name="yearCheckBox" id="year_13" value=1997 checked="false">1997<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_14">
+                                    <input type="checkbox" name="yearCheckBox" id="year_14" value=1998 checked="false">1998<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_15">
+                                    <input type="checkbox" name="yearCheckBox" id="year_15" value=1999 checked="false">1999<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_16">
+                                    <input type="checkbox" name="yearCheckBox" id="year_16" value=2000 checked="false">2000<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_17">
+                                    <input type="checkbox" name="yearCheckBox" id="year_17" value=2001 checked="false">2001<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_18">
+                                    <input type="checkbox" name="yearCheckBox" id="year_18" value=2002 checked="false">2002<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_19">
+                                    <input type="checkbox" name="yearCheckBox" id="year_19" value=2003 checked="false">2003<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_20">
+                                    <input type="checkbox" name="yearCheckBox" id="year_20" value=2004 checked="false">2004<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_21">
+                                    <input type="checkbox" name="yearCheckBox" id="year_21" value=2005 checked="false">2005<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_22">
+                                    <input type="checkbox" name="yearCheckBox" id="year_22" value=2006 checked="false">2006<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_23">
+                                    <input type="checkbox" name="yearCheckBox" id="year_23" value=2007 checked="false">2007<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_24">
+                                    <input type="checkbox" name="yearCheckBox" id="year_24" value=2008 checked="false">2008<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_25">
+                                    <input type="checkbox" name="yearCheckBox" id="year_25" value=2009 checked="false">2009<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_26">
+                                    <input type="checkbox" name="yearCheckBox" id="year_26" value=2010 checked="false">2010<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_27">
+                                    <input type="checkbox" name="yearCheckBox" id="year_27" value=2011 checked="false">2011<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_28">
+                                    <input type="checkbox" name="yearCheckBox" id="year_28" value=2012 checked="false">2012<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_29">
+                                    <input type="checkbox" name="yearCheckBox" id="year_29" value=2013 checked="false">2013<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_30">
+                                    <input type="checkbox" name="yearCheckBox" id="year_30" value=2014 checked="false">2014<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_31">
+                                    <input type="checkbox" name="yearCheckBox" id="year_31" value=2015 checked="false">2015<br>
+                                </label>
+                                <label class="btn btn-secondary" id="year_l_32">
+                                    <input type="checkbox" name="yearCheckBox" id="year_32" value=2016 checked="false">2016<br>
+                                </label>
+                            </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12" id="selected-countries-div">
+                            <form id="form" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary active" id="country_l_0">
+                                      <input type="checkbox" name="countryCheckBox" id="country_0" value="" checked="true">Show All Countries Info<br>
+                                    </label>
+                                </form>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </body>
+</html>
